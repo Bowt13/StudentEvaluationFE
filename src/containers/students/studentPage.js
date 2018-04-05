@@ -1,56 +1,60 @@
 //Dependencies
-import React, {PureComponent} from 'react';
-import {connect} from 'react-redux';
+import React, {PureComponent} from 'react'
+import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-
-//MaterialUI
+import Paper from 'material-ui/Paper';
 
 //Actions
-import {getBatches} from '../../actions/batches/batchesAction'
+import {getStudent} from '../../actions/students/studentsAction'
 
 //Components
-import BatchesCard from '../../components/batches/batchesCard'
+import StudentViewer from '../../components/students/studentViewer'
 
+class LoginPage extends PureComponent {
 
-class StudentsPage extends PureComponent {
+  handleSubmit = (data) => {
+    const {Remark, currentState, currentColorCode} =this.state
+    this.props.login(data.Email, data.Password)
+  }
 
   componentWillMount() {
-    const {batches, authenticated, getBatches} = this.props
+    const {student, authenticated, getStudent, match} = this.props
     if (authenticated) {
-      if (batches === null) getBatches()
+      if (student === null) getStudent(match.params.id)
     }
   }
 
 	render() {
-    const {batches, authenticated} = this.props
-    if (!authenticated) return (
-      <Redirect to="/login" />
-    )
+    const {authenticated, student, match} = this.props
+		if (!authenticated) return (
+			<Redirect to="/login" />
+		)
+    if (!student) this.componentWillMount()
 		return (
-      <div>
-      {batches &&
-        <div className='batches-wrapper'>
-          {batches.map((batch) => (
-            <BatchesCard batch={batch}/>
-          ))}
-      </div>}
-      </div>
-
+			<div>
+      <Paper zDepth={2}
+			style={{
+				position: 'relative',
+				top: 100,
+        height: 320,
+        width: 700,
+        margin: 20,
+        textAlign: 'left',
+        display: 'inline-block',
+      }}>
+        {student && <StudentViewer student={student[match.params.id]} onSubmit={this.handleSubmit}/>}
+      </Paper>
+			</div>
 		)
 	}
 }
 
 const mapStateToProps = function (state) {
 	return {
-    authenticated: state.currentTeacher !== null,
-    batches: state.batches === null ?
-    null : Object.values(state.batches).sort((a, b) => a.id - b.id)
-
+		authenticated: state.currentTeacher !== null,
+    student: state.student,
+    error: state.login.error
 	}
 }
 
-const mapDispatchToProps = {
-  getBatches,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(StudentsPage)
+export default connect(mapStateToProps, {getStudent})(LoginPage)

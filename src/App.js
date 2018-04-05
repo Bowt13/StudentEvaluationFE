@@ -13,21 +13,34 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TopBar from './containers/TopBar';
 import LoginPage from './containers/login/loginPage';
 import BatchesPage from './containers/batches/batchesPage';
-import StudentsPage from './containers/students/studentPage';
+import StudentsPage from './containers/students/studentsPage';
+import StudentPage from './containers/students/studentPage';
 
 //Styling
 import './App.css';
 
-const StudentEvaluationPage = () => (
-  <MuiThemeProvider>
-    <TopBar/>
-    <Route exact path="/login" component={LoginPage} />
-    <Route exact path="/batches" component={BatchesPage} />
-    <Route exact path="/games/:id" component={StudentsPage} />
-  </MuiThemeProvider>
-);
+class StudentEvaluationPage extends Component {
+  state = {
+  currentBatch: null
+}
+  render() {
+    return (
+      <MuiThemeProvider>
+        <TopBar/>
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/batches" component={BatchesPage} />
+        <Route exact path="/batches/:id" component={StudentsPage} />
+        <Route exact path="/students/:id" component={StudentPage} />
+      </MuiThemeProvider>
+    );
+  }
+}
+
 
 class App extends Component {
+  state = {
+  currentBatch: null
+}
   render() {
     return (
       <Router>

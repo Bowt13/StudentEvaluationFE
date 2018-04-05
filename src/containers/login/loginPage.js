@@ -13,7 +13,6 @@ import LoginForm from '../../components/login/loginForm'
 class LoginPage extends PureComponent {
 	handleSubmit = (data) => {
 		this.props.login(data.Email, data.Password)
-    console.log(data.Email, data.Password)
 	}
 
 	render() {
@@ -23,15 +22,16 @@ class LoginPage extends PureComponent {
 
 		return (
 			<div>
-      <Paper zDepth={2} style={
-        {
-          height: 300,
-          width: 450,
-          margin: 20,
-          textAlign: 'left',
-          display: 'inline-block',
-        }
-      }>
+      <Paper zDepth={2}
+			style={{
+				position: 'relative',
+				top: 100,
+        height: 300,
+        width: 450,
+        margin: 20,
+        textAlign: 'left',
+        display: 'inline-block',
+      }}>
 				<h1 style={
           {
             position: 'relative',

@@ -2,7 +2,22 @@
   text-align: center;
 }
 
-.batches-wrapper{
+.cards-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.appbar-title-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.evaluation-wrapper{
+  position: relative;
+  top: -14rem;
+  left: 14rem;
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;

@@ -13,6 +13,9 @@ import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new';
 //Components
 import AppBar from 'material-ui/AppBar';
 
+//Actions
+import {logout} from '../actions/login/loginAction'
+
 const Login = (props) => (
   <IconMenu/>
 )
@@ -29,7 +32,7 @@ const Logged = (props) => (
     <MenuItem primaryText="Refresh" />
     <MenuItem primaryText="Help" />
     <Divider/>
-    <MenuItem primaryText="Sign out" leftIcon={<PowerSettingsNew />}/>
+    <MenuItem primaryText="Sign out" leftIcon={<PowerSettingsNew />} onClick={_ => this.handleLogout()}/>
   </IconMenu>
 )
 
@@ -46,6 +49,10 @@ const Logged = (props) => (
     }
   }
 
+  handleLogout = () => {
+    this.props.logout()
+  }
+
 	render() {
 		return (
       <div>
@@ -54,11 +61,15 @@ const Logged = (props) => (
       style={{
         backgroundColor: '#d32f2f',
         height: 2,
+        position: 'fixed',
+        top: 0,
       }}/>
       <AppBar
         style={{
           backgroundColor:'#ffffff',
           height: 50,
+          position: 'fixed',
+          top: 2,
         }}
         titleStyle={{
           color:'#d32f2f',
@@ -66,8 +77,29 @@ const Logged = (props) => (
           top: -1,
         }}
         showMenuIconButton={false}
-        title={<img
-          src={require (`../styling/images/logo.87bc4a59.svg`)} alt='codaiseur'/>}
+        title=
+        { <div className= "appbar-title-wrapper">
+          <h3
+          style={{
+            position: 'relative',
+            top: -30,
+            left: 20,
+          }}>
+          Student Evaluation
+          </h3>
+          <img
+          style={{
+            position: 'relative',
+            top: -30,
+            left: 290,
+            textAlign: 'center',
+          }}
+
+          src={require (`../styling/images/logo.87bc4a59.svg`)}
+          alt='codaiseur'
+          />
+          </div>
+        }
         iconElementRight={this.state.logged ? <Logged /> : <Login />}
         iconStyleRight={{
           color:'#d32f2f',
@@ -85,4 +117,4 @@ const mapStateToProps = function (state) {
 	}
 }
 
-export default connect(mapStateToProps)(TopBar)
+export default connect(mapStateToProps, {logout})(TopBar)

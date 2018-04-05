@@ -2,8 +2,11 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 //MaterialUI
+  //Colors
+import {red700} from 'material-ui/styles/colors';
 
 //Actions
 import {getBatches} from '../../actions/batches/batchesAction'
@@ -13,6 +16,9 @@ import BatchesCard from '../../components/batches/batchesCard'
 
 
 class BatchesPage extends PureComponent {
+  static propTypes = {
+  setCurrentBatch: PropTypes.func.isRequired,
+}
 
   componentWillMount() {
     const {batches, authenticated, getBatches} = this.props
@@ -28,12 +34,32 @@ class BatchesPage extends PureComponent {
     )
 		return (
       <div>
-      {batches &&
-        <div className='batches-wrapper'>
-          {batches.map((batch) => (
-            <BatchesCard batch={batch}/>
-          ))}
-      </div>}
+        <div style={{
+          height: 364,
+          width: '100%',
+          position: 'relative',
+          top: 0,
+          backgroundColor: red700,
+        }}>
+          <h1 style={{
+            position: 'relative',
+            top: 130,
+            color: 'white',
+          }}>/ All Batches /
+          </h1>
+          <p style={{
+            position: 'relative',
+            top: 130,
+            color: 'white',
+          }}>Your Teaching journey starts here!
+          </p>
+        </div>
+        {batches &&
+          <div className='cards-wrapper'>
+            {batches.map((batch) => (
+              <BatchesCard batch={batch}/>
+            ))}
+        </div>}
       </div>
 
 		)
@@ -45,7 +71,6 @@ const mapStateToProps = function (state) {
     authenticated: state.currentTeacher !== null,
     batches: state.batches === null ?
     null : Object.values(state.batches).sort((a, b) => a.id - b.id)
-
 	}
 }
 
