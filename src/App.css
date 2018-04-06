@@ -1,24 +1,34 @@
+
 .App {
   text-align: center;
+  font-family: 'Roboto', sans-serif;
 }
 
-.cards-wrapper{
+.cards-wrapper {
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
 }
 
-.appbar-title-wrapper{
+.appbar-title-wrapper {
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
 }
 
-.evaluation-wrapper{
+.evaluation-wrapper {
   position: relative;
   top: -14rem;
   left: 14rem;
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
+}
+
+.students2batch-wrapper {
+  text-align: left;
+}
+
+.batch2student-wrapper {
+  text-align: left;
 }

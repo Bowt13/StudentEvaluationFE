@@ -1,14 +1,14 @@
-import {UPDATE_STUDENTS, UPDATE_STUDENT} from '../actions/students/studentsAction'
+import {UPDATE_STUDENTS, UPDATE_STUDENT, ADD_STUDENT, UPDATE_STUDENT_SUCCESS} from '../actions/students/studentsAction'
 
 
 export default (state = null, {type, payload}) => {
   switch (type) {
-    // case ADD_GAME:
-    //   return {
-    //     ...state,
-    //     [payload.id]: payload
-    //   }
-    //
+    case ADD_STUDENT:
+      return {
+        ...state,
+        [payload.id]: payload
+      }
+
     case UPDATE_STUDENT:
       const student = {[payload.id]: payload}
       return student

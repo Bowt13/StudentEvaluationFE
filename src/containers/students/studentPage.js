@@ -13,7 +13,6 @@ import StudentViewer from '../../components/students/studentViewer'
 class LoginPage extends PureComponent {
 
   handleSubmit = (data) => {
-    const {Remark, currentState, currentColorCode} =this.state
     this.props.login(data.Email, data.Password)
   }
 

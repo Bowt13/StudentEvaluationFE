@@ -5,6 +5,7 @@ import {baseUrl} from '../../constants'
 //Constants
 export const UPDATE_STUDENTS = 'UPDATE_STUDENTS'
 export const UPDATE_STUDENT = 'UPDATE_STUDENT'
+export const ADD_STUDENT = 'ADD_STUDENT'
 
 export const getStudents = (batchId) => (dispatch, getState) => {
   const state = getState()
@@ -32,6 +33,23 @@ export const getStudent = (studentId) => (dispatch, getState) => {
     .then(result => {
       dispatch({
         type: UPDATE_STUDENT,
+        payload: result.body
+      })
+    })
+    .catch(err => console.error(err))
+}
+
+export const createStudent = (student) => (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentTeacher.jwt
+
+  request
+    .post(`${baseUrl}/students`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .send(student)
+    .then(result => {
+      dispatch({
+        type: ADD_STUDENT,
         payload: result.body
       })
     })

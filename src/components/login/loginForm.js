@@ -17,6 +17,11 @@ export default class LoginForm extends PureComponent {
     })
   }
 
+	checkKey = (x, event) => {
+		console.log(x)
+		console.log(event)
+	}
+
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
@@ -49,6 +54,7 @@ export default class LoginForm extends PureComponent {
               }
             }
             onChange={this.handleChange}
+						onkeydown={(x, event) => this.checkKey(event, 'EndDate')}
           />
 				</div>
 

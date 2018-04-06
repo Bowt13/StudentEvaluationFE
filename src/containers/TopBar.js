@@ -7,6 +7,8 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new';
+import ArrowDropLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
+
 
 
 
@@ -15,26 +17,6 @@ import AppBar from 'material-ui/AppBar';
 
 //Actions
 import {logout} from '../actions/login/loginAction'
-
-const Login = (props) => (
-  <IconMenu/>
-)
-
-const Logged = (props) => (
-  <IconMenu
-    {...props}
-    iconButtonElement={
-      <IconButton><MoreVertIcon /></IconButton>
-    }
-    targetOrigin={{horizontal: 'right', vertical: 'top'}}
-    anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-  >
-    <MenuItem primaryText="Refresh" />
-    <MenuItem primaryText="Help" />
-    <Divider/>
-    <MenuItem primaryText="Sign out" leftIcon={<PowerSettingsNew />} onClick={_ => this.handleLogout()}/>
-  </IconMenu>
-)
 
  class TopBar extends PureComponent {
   state = {
@@ -54,6 +36,35 @@ const Logged = (props) => (
   }
 
 	render() {
+    const Logged = (props) => (
+      <IconMenu
+        {...props}
+        iconButtonElement={
+          <IconButton><MoreVertIcon /></IconButton>
+        }
+        targetOrigin={{horizontal: 'right', vertical: 'top'}}
+        anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+      >
+      <MenuItem
+         primaryText="Batches"
+         leftIcon={<ArrowDropLeft/>}
+         menuItems={[
+           <MenuItem primaryText="Go to" href='/batches' />,
+           <MenuItem primaryText="Create batches" href='/batches/creator' />,
+         ]}
+       />
+       <MenuItem
+          primaryText="Students"
+          leftIcon={<ArrowDropLeft/>}
+          menuItems={[
+            <MenuItem primaryText="Create Student" href='/student/creator' />,
+            <MenuItem primaryText="Connect To Batch" href='/students2Batches' />,
+          ]}
+        />
+        <Divider/>
+        <MenuItem primaryText="Sign out" leftIcon={<PowerSettingsNew />} onClick={_ => this.handleLogout()}/>
+      </IconMenu>
+    )
 		return (
       <div>
       <AppBar
@@ -90,7 +101,7 @@ const Logged = (props) => (
           <img
           style={{
             position: 'relative',
-            top: -30,
+            top: -32,
             left: 290,
             textAlign: 'center',
           }}
@@ -100,7 +111,7 @@ const Logged = (props) => (
           />
           </div>
         }
-        iconElementRight={this.state.logged ? <Logged /> : <Login />}
+        iconElementRight={<Logged />}
         iconStyleRight={{
           color:'#d32f2f',
           position: 'relative',

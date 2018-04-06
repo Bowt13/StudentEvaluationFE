@@ -21,8 +21,9 @@ class BatchesPage extends PureComponent {
 }
 
   componentWillMount() {
-    const {batches, authenticated, getBatches} = this.props
+    const {batches, authenticated, getBatches, currentTeacher} = this.props
     if (authenticated) {
+      console.log(currentTeacher)
       if (batches === null) getBatches()
     }
   }
@@ -69,6 +70,7 @@ class BatchesPage extends PureComponent {
 const mapStateToProps = function (state) {
 	return {
     authenticated: state.currentTeacher !== null,
+    currentTeacher: state.currentTeacher,
     batches: state.batches === null ?
     null : Object.values(state.batches).sort((a, b) => a.id - b.id)
 	}

@@ -27,7 +27,7 @@ class LoginPage extends PureComponent {
 				position: 'relative',
 				top: 100,
         height: 300,
-        width: 450,
+        width: '30%',
         margin: 20,
         textAlign: 'left',
         display: 'inline-block',

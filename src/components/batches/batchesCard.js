@@ -90,9 +90,9 @@ class BatchesCard extends PureComponent {
           top: -60,
           left: 30,
         }}>
-        {`Start: ${batch.startDate}`}
+        {`Start: ${batch.startDate.split('T', 1)}`}
         <br/>
-        {`End: ${batch.endDate}`}
+        {`End: ${batch.endDate.split('T', 1)}`}
         </p>
         </CardText>
       </Card>
