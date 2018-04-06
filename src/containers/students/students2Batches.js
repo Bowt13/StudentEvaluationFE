@@ -31,7 +31,14 @@ class Students2Batches extends PureComponent {
       return str.charAt(0).toUpperCase() + str.slice(1);
   }
   checkboxClickChecker = (student) => {
-
+    if (this.state[student.id] === false || !this.state[student.id]){
+    this.setState({
+      [student.id]: true,
+    })}
+    if (this.state[student.id] === true) {
+    this.setState({
+      [student.id]: false,
+    })}
   }
   componentWillMount() {
     const {students, batches, authenticated, getStudents, getBatches} = this.props

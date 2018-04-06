@@ -54,6 +54,7 @@ class StudentsPage extends PureComponent {
             <div className='cards-wrapper'>
               {students.map((student) => {
                 if (!student.batch) return null
+                console.log(student.batch.batchNumber === match.params.id)
                 if (student.batch.batchNumber === match.params.id) {
                   return <StudentsCard student={student}/>
                 } else return null

@@ -2,7 +2,7 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom'
-import PropTypes from 'prop-types'
+
 
 //MaterialUI
   //Colors
@@ -16,9 +16,6 @@ import BatchesCard from '../../components/batches/batchesCard'
 
 
 class BatchesPage extends PureComponent {
-  static propTypes = {
-  setCurrentBatch: PropTypes.func.isRequired,
-}
 
   componentWillMount() {
     const {batches, authenticated, getBatches, currentTeacher} = this.props

@@ -27,7 +27,11 @@ class StudentViewer extends PureComponent {
   }
 
 	handleSubmit = () => {
-		this.props.onSubmit(this.state)
+    const {currentColorCode, Remark} = this.state
+    const {student, currentTeacher} = this.props
+    let evaluation = {date: new Date(), evaluation: currentColorCode, remark: Remark, student: student, teacher: currentTeacher.jwt}
+    console.log(evaluation);
+		this.props.onSubmit(evaluation)
 	}
 
   handleCreate = () => {
@@ -59,7 +63,7 @@ class StudentViewer extends PureComponent {
   handleRadiobuttonClick= (value) => {
     console.log(value)
     this.setState({
-      currentColorCode: value
+      currentColorCode: value,
     })
   }
 
@@ -106,21 +110,30 @@ class StudentViewer extends PureComponent {
           }}
         />
          <div className='evaluation-wrapper'>
-            {evaluations.map((evaluation) => {
-              const evaluationColor = evaluation.evaluation
-              return <Paper
-                style={{
-                  height: 50,
-                  width: 50,
-                  margin: 2,
-                  backgroundColor:`${
-                    this.state.currentState === 'post' &&
-                    evaluationColor
-                  }`,
-                  textAlign: 'center',
-                  display: 'inline-block',
-                }}
-                onClick= {_=> this.handleEvaluationClick(evaluation)}></Paper>
+          {!evaluations[0] && <Paper
+            style={{
+              height: 50,
+              width: 50,
+              margin: 2,
+              opacity: 0,
+            }}
+            />
+          }
+          {evaluations.map((evaluation) => {
+            const evaluationColor = evaluation.evaluation
+            return <Paper
+              style={{
+                height: 50,
+                width: 50,
+                margin: 2,
+                backgroundColor:`${
+                  this.state.currentState === 'post' &&
+                  evaluationColor
+                }`,
+                textAlign: 'center',
+                display: 'inline-block',
+              }}
+              onClick= {_=> this.handleEvaluationClick(evaluation)}></Paper>
             })}
         </div>
         <form onSubmit={this.handleSubmit}>

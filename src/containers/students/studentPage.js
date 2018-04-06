@@ -6,6 +6,7 @@ import Paper from 'material-ui/Paper';
 
 //Actions
 import {getStudent} from '../../actions/students/studentsAction'
+import {createEvaluation} from '../../actions/evaluations/evaluationsAction'
 
 //Components
 import StudentViewer from '../../components/students/studentViewer'
@@ -13,7 +14,7 @@ import StudentViewer from '../../components/students/studentViewer'
 class LoginPage extends PureComponent {
 
   handleSubmit = (data) => {
-    this.props.login(data.Email, data.Password)
+    this.props.createEvaluation(data)
   }
 
   componentWillMount() {
@@ -56,4 +57,4 @@ const mapStateToProps = function (state) {
 	}
 }
 
-export default connect(mapStateToProps, {getStudent})(LoginPage)
+export default connect(mapStateToProps, {getStudent, createEvaluation})(LoginPage)

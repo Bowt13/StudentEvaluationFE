@@ -25,6 +25,8 @@ class StudentCreatorPage extends PureComponent {
 	handleSubmit = (data) => {
     if (data.imgUrl === '') {data.imgUrl ='https://www.watsonmartin.com/wp-content/uploads/2016/03/default-profile-picture.jpg'
     }
+    if (data.batchId === null) {data.batchId = 1
+    }
 		this.props.createStudent(data)
     this.setState({
       open: true,

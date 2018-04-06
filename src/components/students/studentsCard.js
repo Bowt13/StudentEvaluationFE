@@ -33,33 +33,37 @@ class StudentsCard extends PureComponent {
     const {student} = this.props
     var evaluations = Object.values(student.evaluations).sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
     let color
-    switch (evaluations[student.evaluations.length-1].evaluation) {
-      case 'red':
-        color = red400
-        break;
-      case 'yellow':
-        color = yellow400
-        break;
-      case 'green':
-        color = green400
-        break;
-      default:
-        color = red400
+    if (evaluations[student.evaluations.length-1] !== undefined){
+      switch (evaluations[student.evaluations.length-1].evaluation) {
+        case 'red':
+          color = red400
+          break;
+        case 'yellow':
+          color = yellow400
+          break;
+        case 'green':
+          color = green400
+          break;
+        default:
+          color = red400
+      }
     }
 
     let textColor
-    switch (evaluations[student.evaluations.length-1].evaluation) {
-      case 'red':
-        textColor = red900
-        break;
-      case 'yellow':
-        textColor = yellow900
-        break;
-      case 'green':
-        textColor = green900
-        break;
-      default:
-        textColor = red900
+    if (evaluations[student.evaluations.length-1] !== undefined){
+      switch (evaluations[student.evaluations.length-1].evaluation) {
+        case 'red':
+          textColor = red900
+          break;
+        case 'yellow':
+          textColor = yellow900
+          break;
+        case 'green':
+          textColor = green900
+          break;
+        default:
+          textColor = red900
+      }
     }
 
     return(
@@ -98,6 +102,7 @@ class StudentsCard extends PureComponent {
         <CardText style={{
           textAlign: 'left',
         }}>
+        { evaluations[student.evaluations.length-1] &&
           <p style={{
             color: textColor,
             fontSize: 30,
@@ -107,7 +112,7 @@ class StudentsCard extends PureComponent {
             left: 0,
           }}>
           {`${evaluations[student.evaluations.length-1].evaluation}`}
-          </p>
+          </p>}
         </CardText>
       </Card>
     )

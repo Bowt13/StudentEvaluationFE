@@ -11,6 +11,7 @@ export default class StudentCreator extends PureComponent {
     firstName: '',
     lastName: '',
     imgUrl: '',
+    batchId: null,
   }
 
 	handleSubmit = () => {
