@@ -57,14 +57,15 @@ export const createStudent = (student) => (dispatch, getState) => {
     .catch(err => console.error(err))
 }
 
-export const connectStudent = (studentId, batchId) => (dispatch, getState) => {
+export const connectStudent = (student, batch) => (dispatch, getState) => {
   const state = getState()
-  const jwt = state.currentUser.jwt
-
+  const jwt = state.currentTeacher.jwt
+  console.log(batch)
+  console.log(student)
   request
-    .patch(`${baseUrl}/students/${studentId}`)
+    .patch(`${baseUrl}/students/${student.id}`)
     .set('Authorization', `Bearer ${jwt}`)
-    .send({batchId})
+    .send(batch)
     .then(result => {
       dispatch({
         type: UPDATE_STUDENT_SUCCESS

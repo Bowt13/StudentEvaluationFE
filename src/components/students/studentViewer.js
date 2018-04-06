@@ -66,7 +66,7 @@ class StudentViewer extends PureComponent {
   }
 
   handleRadiobuttonClick= (value) => {
-    console.log(value)
+    console.log(this.props.currentTeacher)
     this.setState({
       currentColorCode: value,
     })

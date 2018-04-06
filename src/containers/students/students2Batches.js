@@ -19,7 +19,7 @@ import {Redirect} from 'react-router-dom'
 //Actions
 import {getStudents} from '../../actions/students/studentsAction'
 import {getBatches} from '../../actions/batches/batchesAction'
-import {editStudent} from '../../actions/students/studentsAction'
+import {connectStudent} from '../../actions/students/studentsAction'
 
 //Components
 
@@ -28,22 +28,20 @@ class Students2Batches extends PureComponent {
 
   }
 
+  selectStudents = (student, item) => {
+    if (student) return item[0]
+  }
+
   handleButton = () => {
-    let students = []
-    let batch = ''
-    console.log(Object.values(this.state).map((item) => {
-      switch (item.length) {
-        case 1:
-          batch = item
-          break;
-        case 2:
-          if (item[2] === true) students = students.push(item[0])
-          break;
-        default:
-          break;
-      }
-    }))
-    students.map((student))
+    let state = Object.values(this.state).sort((a, b) => a.length - b.length)
+    let batch = state.pop
+    let students =  []
+    students.push(state.map ((item) => {
+     return this.selectStudents(item[1], item)
+   }))
+   console.log(students);
+    let student = students.values()
+      this.props.connectStudent(student.next().value, batch)
   }
 
   capitalize = (str) => {
@@ -70,6 +68,12 @@ class Students2Batches extends PureComponent {
   radioClickChecker = (batch) => {
     this.setState({
       radio: batch
+    })
+  }
+
+  radioClickCheckerStudent = (student) => {
+    this.setState({
+      student: student
     })
   }
 
@@ -202,6 +206,7 @@ const mapStateToProps = function (state) {
 const mapDispatchToProps = {
   getStudents,
   getBatches,
+  connectStudent,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Students2Batches)
