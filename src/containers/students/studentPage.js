@@ -15,6 +15,7 @@ class LoginPage extends PureComponent {
 
   handleSubmit = (data) => {
     this.props.createEvaluation(data)
+    window.location='/batches'
   }
 
   componentWillMount() {

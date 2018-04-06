@@ -19,27 +19,60 @@ import {Redirect} from 'react-router-dom'
 //Actions
 import {getStudents} from '../../actions/students/studentsAction'
 import {getBatches} from '../../actions/batches/batchesAction'
+import {editStudent} from '../../actions/students/studentsAction'
 
 //Components
 
 class Students2Batches extends PureComponent {
-  state={
+  state= {
 
+  }
+
+  handleButton = () => {
+    let students = []
+    let batch = ''
+    console.log(Object.values(this.state).map((item) => {
+      switch (item.length) {
+        case 1:
+          batch = item
+          break;
+        case 2:
+          if (item[2] === true) students = students.push(item[0])
+          break;
+        default:
+          break;
+      }
+    }))
+    students.map((student))
   }
 
   capitalize = (str) => {
       return str.charAt(0).toUpperCase() + str.slice(1);
   }
+
   checkboxClickChecker = (student) => {
-    if (this.state[student.id] === false || !this.state[student.id]){
+    if (!this.state[student.id]){
     this.setState({
-      [student.id]: true,
+      [student.id]: [student, true],
     })}
-    if (this.state[student.id] === true) {
+    if (this.state[student.id] && this.state[student.id][1] === false) {
     this.setState({
-      [student.id]: false,
+      [student.id]: [student, true],
     })}
+
+    if (this.state[student.id] && this.state[student.id][1] === true) {
+    this.setState({
+      [student.id]: [student, false],
+    })}
+    if (this.state[student.id]) console.log(this.state[student.id][1])
   }
+
+  radioClickChecker = (batch) => {
+    this.setState({
+      radio: batch
+    })
+  }
+
   componentWillMount() {
     const {students, batches, authenticated, getStudents, getBatches} = this.props
     if (authenticated) {
@@ -93,7 +126,8 @@ class Students2Batches extends PureComponent {
               {students &&
               <div className='students2batch-wrapper'>
                 {students.map((student) => {
-                    return <ul>
+                  return !student.batch &&
+                     <ul>
                     <Checkbox
                       onClick={_=> this.checkboxClickChecker(student)}
                       checkedIcon={<AccountCircle />}
@@ -121,7 +155,8 @@ class Students2Batches extends PureComponent {
                 {batches.map((batch) => {
                   return<
                     RadioButton
-                      value="light"
+                      onClick={_=> this.radioClickChecker(batch)}
+                      value={batch.id}
                       label={`Batch:${batch.batchNumber}`}
                       style={{
                         width: 100,
@@ -146,7 +181,7 @@ class Students2Batches extends PureComponent {
                   left: 500,
                 }
               }
-              onClick={_ => console.log(this.state)}
+              onClick={_ => this.handleButton()}
             />
           </div>
         </div>

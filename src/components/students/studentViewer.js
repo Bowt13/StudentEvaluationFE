@@ -32,6 +32,11 @@ class StudentViewer extends PureComponent {
     let evaluation = {date: new Date(), evaluation: currentColorCode, remark: Remark, student: student, teacher: currentTeacher.jwt}
     console.log(evaluation);
 		this.props.onSubmit(evaluation)
+    this.setState({
+      Remark: '',
+      currentState: 'post',
+      currentEvaluation: 'new',
+    })
 	}
 
   handleCreate = () => {
