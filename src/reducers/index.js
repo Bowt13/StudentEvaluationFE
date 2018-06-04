@@ -5,11 +5,10 @@ import batches from './batches'
 import students from './students'
 import student from './students'
 
-
 export default {
-  login,
-  currentTeacher,
-  batches,
-  students,
-  student,
+	login,
+	currentTeacher,
+	batches,
+	students,
+	student
 }

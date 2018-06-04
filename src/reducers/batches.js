@@ -1,21 +1,20 @@
-import {UPDATE_BATCHES, ADD_BATCH} from '../actions/batches/batchesAction'
+import { UPDATE_BATCHES, ADD_BATCH } from '../actions/batches/batchesAction'
 
+export default (state = null, { type, payload }) => {
+	switch (type) {
+		case ADD_BATCH:
+			return {
+				...state,
+				[payload.id]: payload
+			}
 
-export default (state = null, {type, payload}) => {
-  switch (type) {
-    case ADD_BATCH:
-      return {
-        ...state,
-        [payload.id]: payload
-      }
+		case UPDATE_BATCHES:
+			return payload.reduce((batches, batch) => {
+				batches[batch.id] = batch
+				return batches
+			}, {})
 
-    case UPDATE_BATCHES:
-      return payload.reduce((batches, batch) => {
-        batches[batch.id] = batch
-        return batches
-      }, {})
-      
-    default:
-      return state
-  }
+		default:
+			return state
+	}
 }

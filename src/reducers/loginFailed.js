@@ -1,7 +1,7 @@
 //Actions
-import {USER_LOGIN_FAILED} from '../actions/login/loginAction'
+import { USER_LOGIN_FAILED } from '../actions/login/loginAction'
 
-export default function (state = {}, {type, payload}) {
+export default function(state = {}, { type, payload }) {
 	switch (type) {
 		case USER_LOGIN_FAILED:
 			return {
@@ -9,6 +9,6 @@ export default function (state = {}, {type, payload}) {
 			}
 
 		default:
-      return state
+			return state
 	}
 }
